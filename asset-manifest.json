@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/padel-tracker/static/js/main.648fd6df.js",
+    "main.js": "/padel-tracker/static/js/main.3c0988b0.js",
     "index.html": "/padel-tracker/index.html",
-    "main.648fd6df.js.map": "/padel-tracker/static/js/main.648fd6df.js.map"
+    "main.3c0988b0.js.map": "/padel-tracker/static/js/main.3c0988b0.js.map"
   },
   "entrypoints": [
-    "static/js/main.648fd6df.js"
+    "static/js/main.3c0988b0.js"
   ]
 }
