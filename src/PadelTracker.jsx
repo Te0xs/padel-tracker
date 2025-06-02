@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+/* versione vecchia
 const styles = {
   container: {
     backgroundColor: "#121212",
@@ -7,6 +7,9 @@ const styles = {
     minHeight: "100vh",
     padding: "20px",
     fontFamily: "sans-serif",
+    maxWidth: "100vw",
+    boxSizing: "border-box",
+    overflowX: "auto",       // permette lo scroll orizzontale se serve
   },
   button: {
     backgroundColor: "#1f1f1f",
@@ -15,21 +18,27 @@ const styles = {
     padding: "8px 16px",
     cursor: "pointer",
     margin: "5px",
+    fontSize: "1rem",        // aumenta un po’ la leggibilità su mobile
+    minWidth: "44px",        // dimensione minima per tap comodo su touch
   },
   table: {
     width: "100%",
     borderCollapse: "collapse",
     marginTop: "20px",
+    tableLayout: "auto",      // evita larghezze fisse delle celle
+    fontSize: "0.9rem",       // leggermente più piccolo per adattarsi
   },
   th: {
     border: "1px solid #333",
     padding: "8px",
     backgroundColor: "#222",
+    whiteSpace: "nowrap",     // evita che header vadano a capo, meglio scroll
   },
   td: {
     border: "1px solid #333",
     padding: "8px",
     textAlign: "center",
+    whiteSpace: "nowrap",     // stessa cosa per le celle dati
   },
   modalOverlay: {
     position: "fixed",
@@ -38,12 +47,16 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    padding: "10px",          // padding per non toccare i bordi schermo su mobile
+    overflowY: "auto",
   },
   modal: {
     backgroundColor: "#1e1e1e",
     padding: "20px",
     borderRadius: "8px",
-    width: "300px",
+    width: "100%",            // prende tutta la larghezza disponibile
+    maxWidth: "400px",        // ma non più larga di 400px
+    boxSizing: "border-box",
   },
   input: {
     width: "100%",
@@ -52,8 +65,63 @@ const styles = {
     backgroundColor: "#333",
     color: "#eee",
     border: "1px solid #444",
+    fontSize: "1rem",
+    boxSizing: "border-box",
+  },
+};*/
+
+const styles = {
+  container: {
+    backgroundColor: "#f9f9f9",
+    color: "#333",
+    minHeight: "100vh",
+    padding: "20px",
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+  },
+  card: {
+    backgroundColor: "#fff",
+    borderRadius: "12px",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+    padding: "16px 20px",
+    marginBottom: "16px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+  },
+  label: {
+    fontWeight: "600",
+    fontSize: "0.9rem",
+    color: "#555",
+  },
+  value: {
+    fontWeight: "400",
+    fontSize: "1rem",
+    color: "#222",
+  },
+  row: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  actions: {
+    marginTop: "12px",
+    display: "flex",
+    gap: "12px",
+  },
+  button: {
+    backgroundColor: "transparent",
+    border: "none",
+    color: "#007BFF",
+    cursor: "pointer",
+    fontSize: "1.1rem",
+    padding: "4px 8px",
+    borderRadius: "6px",
+    transition: "background-color 0.2s ease",
+  },
+  buttonHover: {
+    backgroundColor: "#e0f0ff",
   },
 };
+
 
 const PadelTracker = () => {
   // Carica da localStorage o usa array vuoto
@@ -178,55 +246,101 @@ const PadelTracker = () => {
 
     closeModal();
   };
+/*
+ const renderMatches = () => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "15px", marginTop: "20px" }}>
+    {matches.map((m) => (
+      <div
+        key={m.id}
+        style={{
+          backgroundColor: "#1f1f1f",
+          padding: "15px",
+          borderRadius: "8px",
+          boxShadow: "0 0 8px rgba(0,0,0,0.5)",
+          color: "#eee",
+        }}
+      >
+        <div><strong>Data:</strong> {m.data}</div>
+        <div><strong>A1:</strong> {m.giocatoreA1}</div>
+        <div><strong>A2:</strong> {m.giocatoreA2}</div>
+        <div><strong>B1:</strong> {m.giocatoreB1}</div>
+        <div><strong>B2:</strong> {m.giocatoreB2}</div>
+        <div><strong>Set 1:</strong> {m.set1}</div>
+        <div><strong>Set 2:</strong> {m.set2}</div>
+        <div><strong>Set 3:</strong> {m.set3 || "-"}</div>
+        <div><strong>Risultato:</strong> {m.risultato}</div>
+        <div><strong>Valore:</strong> {m.valorePartita.toFixed(2)}</div>
+        <div><strong>Punteggio Pre:</strong> {m.punteggioPre.toFixed(2)}</div>
+        <div><strong>Punteggio Post:</strong> {m.punteggioPost.toFixed(2)}</div>
+        <div style={{ marginTop: "10px" }}>
+          <button style={styles.button} onClick={() => openModal(m)}>✏️ Modifica</button>
+          <button
+            style={{ ...styles.button, marginLeft: "10px" }}
+            onClick={() => handleDelete(m.id)}
+          >
+            🗑️ Cancella
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+*/
+const renderMatches = () => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "15px", marginTop: "20px" }}>
+    {matches.map((m) => (
+      <div
+        key={m.id}
+        style={{
+          backgroundColor: "#1e1e1e",
+          borderRadius: "8px",
+          padding: "15px 20px",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+          color: "#eee",
+          display: "flex",
+          flexDirection: "column",
+          gap: "8px",
+        }}
+      >
+        <div style={{ fontWeight: "600", fontSize: "1.1rem" }}>
+          {m.data} — <span style={{ opacity: 0.7 }}>{m.risultato}</span>
+        </div>
 
-  const renderMatches = () => (
-    <table style={styles.table}>
-      <thead>
-        <tr>
-          <th style={styles.th}>Data</th>
-          <th style={styles.th}>A1</th>
-          <th style={styles.th}>A2</th>
-          <th style={styles.th}>B1</th>
-          <th style={styles.th}>B2</th>
-          <th style={styles.th}>Set1</th>
-          <th style={styles.th}>Set2</th>
-          <th style={styles.th}>Set3</th>
-          <th style={styles.th}>Risultato</th>
-          <th style={styles.th}>Valore</th>
-          <th style={styles.th}>Punteggio Pre</th>
-          <th style={styles.th}>Punteggio Post</th>
-          <th style={styles.th}>Azioni</th>
-        </tr>
-      </thead>
-      <tbody>
-        {matches.map((m) => (
-          <tr key={m.id}>
-            <td style={styles.td}>{m.data}</td>
-            <td style={styles.td}>{m.giocatoreA1}</td>
-            <td style={styles.td}>{m.giocatoreA2}</td>
-            <td style={styles.td}>{m.giocatoreB1}</td>
-            <td style={styles.td}>{m.giocatoreB2}</td>
-            <td style={styles.td}>{m.set1}</td>
-            <td style={styles.td}>{m.set2}</td>
-            <td style={styles.td}>{m.set3}</td>
-            <td style={styles.td}>{m.risultato}</td>
-            <td style={styles.td}>{m.valorePartita.toFixed(2)}</td>
-            <td style={styles.td}>{m.punteggioPre.toFixed(2)}</td>
-            <td style={styles.td}>{m.punteggioPost.toFixed(2)}</td>
-            <td style={styles.td}>
-              <button style={styles.button} onClick={() => openModal(m)}>✏️</button>
-              <button
-                style={{ ...styles.button, marginLeft: "5px" }}
-                onClick={() => handleDelete(m.id)}
-              >
-                🗑️
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.9rem" }}>
+          <div>
+            <strong>A1:</strong> {m.giocatoreA1}<br />
+            <strong>A2:</strong> {m.giocatoreA2}
+          </div>
+          <div>
+            <strong>B1:</strong> {m.giocatoreB1}<br />
+            <strong>B2:</strong> {m.giocatoreB2}
+          </div>
+        </div>
+
+        <div style={{ fontSize: "0.9rem", opacity: 0.8 }}>
+          <strong>Set:</strong> {m.set1}, {m.set2}{m.set3 ? `, ${m.set3}` : ""}
+        </div>
+
+        <div style={{ fontSize: "0.9rem", display: "flex", justifyContent: "space-between", opacity: 0.7 }}>
+          <span>Valore: {m.valorePartita.toFixed(2)}</span>
+          <span>Pre: {m.punteggioPre.toFixed(2)}</span>
+          <span>Post: {m.punteggioPost.toFixed(2)}</span>
+        </div>
+
+        <div style={{ marginTop: "10px", display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+          <button style={{ ...styles.button }} onClick={() => openModal(m)}>✏️</button>
+          <button
+            style={{ ...styles.button }}
+            onClick={() => handleDelete(m.id)}
+          >
+            🗑️
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
 
   return (
     <div style={styles.container}>
